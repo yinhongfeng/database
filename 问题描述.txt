@@ -1,0 +1,15 @@
+网摘案例(Linux环境下https://zhidao.baidu.com/question/355816186.html)：
+database = shelve.open('/home/luo/python/test.txt')
+
+自身遇到(windows环境下)：
+database = shelve.open('D:\\database.dat')
+
+问题描述:
+anydbm.error: db type could not be determined
+程序运行失败,一直提示格式与shelve不符，初步怀疑是路径错误导致，多次修改未果。
+
+解决方法：
+网摘案例中的问题是test.txt已经存在，并且格式与shelve不符，所以提示 "db type could not be determined"
+删除/home/luo/python/test.txt文件，首次运行后会自动生成该文件。另外，缺省方式数据文件是二进制的，最好不要用txt结尾来误导别人。
+我认为的解决方法:
+路径一定不能搞错,我的出错文件database.py路径是在D:\\import-model文件夹下,但我一开始运行文件时是在该文件以外的位置创建的database.dat，也就是一开始以“database = shelve.open('D:\\database.dat')”运行导致的出错,后面将“database = shelve.open('D:\\import-model')”后运行成功,该文件夹下不存在database.dat文件.
